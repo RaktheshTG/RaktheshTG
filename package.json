@@ -1,0 +1,12 @@
+{
+  "name": "rakthesh-tg-stats",
+  "version": "1.0.0",
+  "description": "Generate GitHub contribution stats SVG for README",
+  "private": true,
+  "scripts": {
+    "generate": "node scripts/generate-stats.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

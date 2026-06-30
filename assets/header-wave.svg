@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#0d0221"/>
+      <stop offset="50%" stop-color="#6a0dad"/>
+      <stop offset="100%" stop-color="#8B0000"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="textGrad" x1="0" x2="1">
+      <stop offset="0%" stop-color="#b067ff"/>
+      <stop offset="100%" stop-color="#ff6ab9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="200" fill="#0d0221"/>
+
+  <!-- purple wave -->
+  <path d="M0,120 C180,170 300,30 600,80 C900,130 1020,20 1200,70 L1200,200 L0,200 Z"
+        fill="url(#g)" opacity="0.98" filter="url(#glow)">
+    <animate attributeName="d" dur="8s" repeatCount="indefinite"
+      values="
+        M0,120 C180,170 300,30 600,80 C900,130 1020,20 1200,70 L1200,200 L0,200 Z;
+        M0,110 C200,150 340,10 600,100 C860,190 980,40 1200,60 L1200,200 L0,200 Z;
+        M0,125 C160,190 320,40 600,90 C880,140 1010,10 1200,80 L1200,200 L0,200 Z;
+        M0,120 C180,170 300,30 600,80 C900,130 1020,20 1200,70 L1200,200 L0,200 Z"/>
+  </path>
+
+  <!-- main title -->
+  <text x="50%" y="55" font-family="Fira Code, monospace" font-size="44" text-anchor="middle" fill="url(#textGrad)" font-weight="700">
+    RAKTHESH TG
+  </text>
+
+  <!-- subtitle -->
+  <text x="50%" y="90" font-family="Inter, system-ui, sans-serif" font-size="16" text-anchor="middle" fill="#f3e8ff" opacity="0.85">
+    Full-Stack Developer · Agentic AI Builder
+  </text>
+
+  <!-- small desc on bottom-left -->
+  <text x="24" y="170" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#d9c3ff" opacity="0.75">
+    Building end-to-end full-stack products · RAG & multi-agent systems
+  </text>
+</svg>
