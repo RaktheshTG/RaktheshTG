@@ -1,147 +1,145 @@
 #!/usr/bin/env node
-// scripts/generate-stats.js
-// Fetches the contribution calendar using GitHub GraphQL and generates assets/stats-card.svg
 
 const fs = require('fs');
 const path = require('path');
-const fetch = globalThis.fetch;
-
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const GITHUB_USER = process.env.GITHUB_USER;
-const TARGET_STREAK = process.env.TARGET_STREAK ? Number(process.env.TARGET_STREAK) : null;
-
-const MOCK_MODE = (!GITHUB_TOKEN || !GITHUB_USER);
-
-if (MOCK_MODE) {
-	console.warn('GITHUB_TOKEN or GITHUB_USER missing — running in MOCK mode and generating sample SVG.');
-}
 
 const GRAPHQL = `
-query contribs($login: String!) {
-	user(login: $login) {
-		contributionsCollection {
-			contributionCalendar {
-				totalContributions
-				weeks {
-					contributionDays {
-						date
-						contributionCount
-					}
-				}
-			}
-		}
-	}
+query ContributionStats($login: String!) {
+  user(login: $login) {
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks {
+          contributionDays {
+            date
+            contributionCount
+          }
+        }
+      }
+    }
+  }
 }
 `;
 
-async function fetchContributions(login) {
-	const res = await fetch('https://api.github.com/graphql', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${GITHUB_TOKEN}`,
-		},
-		body: JSON.stringify({ query: GRAPHQL, variables: { login } }),
-	});
-	if (!res.ok) {
-		const txt = await res.text();
-		throw new Error(`GitHub API error ${res.status}: ${txt}`);
-	}
-	const data = await res.json();
-	return data.data.user.contributionsCollection.contributionCalendar;
-}
-
 function flattenDays(weeks) {
-	const days = [];
-	for (const w of weeks) {
-		for (const d of w.contributionDays) days.push(d);
-	}
-	// sort by date ascending
-	days.sort((a, b) => new Date(a.date) - new Date(b.date));
-	return days;
+  return weeks
+    .flatMap((week) => week.contributionDays)
+    .sort((a, b) => a.date.localeCompare(b.date));
 }
 
-function computeStreaks(days) {
-	// days is sorted ascending (oldest -> newest)
-	let longest = 0;
-	let running = 0;
-	for (let i = 0; i < days.length; i++) {
-		if (days[i].contributionCount > 0) {
-			running += 1;
-			if (running > longest) longest = running;
-		} else {
-			running = 0;
-		}
-	}
+function previousDate(date) {
+  const value = new Date(`${date}T00:00:00Z`);
+  value.setUTCDate(value.getUTCDate() - 1);
+  return value.toISOString().slice(0, 10);
+}
 
-	// compute current streak: if today's count is 0, do not include today — count trailing positive days
-	let current = 0;
-	let i = days.length - 1;
-	if (i >= 0 && days[i].contributionCount === 0) {
-		// skip today's zero
-		i -= 1;
-	}
-	while (i >= 0 && days[i].contributionCount > 0) {
-		current += 1;
-		i -= 1;
-	}
+function computeStreaks(days, today = new Date().toISOString().slice(0, 10)) {
+  const completedDays = days.filter((day) => day.date <= today);
+  const counts = new Map(
+    completedDays.map((day) => [day.date, Number(day.contributionCount) || 0]),
+  );
 
-	return { current, longest };
+  let longest = 0;
+  let running = 0;
+  let activeDays = 0;
+
+  for (const day of completedDays) {
+    if (day.contributionCount > 0) {
+      activeDays += 1;
+      running += 1;
+      longest = Math.max(longest, running);
+    } else {
+      running = 0;
+    }
+  }
+
+  let cursor = counts.get(today) > 0 ? today : previousDate(today);
+  let current = 0;
+
+  while ((counts.get(cursor) || 0) > 0) {
+    current += 1;
+    cursor = previousDate(cursor);
+  }
+
+  return { current, longest, activeDays };
+}
+
+async function fetchContributions(login, token) {
+  const response = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'User-Agent': 'RaktheshTG-profile-stats',
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+    body: JSON.stringify({ query: GRAPHQL, variables: { login } }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`GitHub API returned ${response.status}: ${await response.text()}`);
+  }
+
+  const payload = await response.json();
+  if (payload.errors?.length) {
+    throw new Error(`GitHub GraphQL error: ${payload.errors.map((error) => error.message).join('; ')}`);
+  }
+
+  const calendar = payload.data?.user?.contributionsCollection?.contributionCalendar;
+  if (!calendar) {
+    throw new Error(`GitHub user "${login}" was not found or returned no contribution calendar`);
+  }
+
+  return calendar;
 }
 
 function buildSvg(template, replacements) {
-	let out = template;
-	for (const k of Object.keys(replacements)) {
-		out = out.replace(new RegExp(`{{${k}}}`, 'g'), String(replacements[k]));
-	}
-	return out;
+  return Object.entries(replacements).reduce(
+    (svg, [key, value]) => svg.replaceAll(`{{${key}}}`, String(value)),
+    template,
+  );
 }
 
 async function main() {
-	const templatePath = path.resolve(__dirname, '..', 'assets', 'stats-template.svg');
-	const outPath = path.resolve(__dirname, '..', 'assets', 'stats-card.svg');
-	const template = fs.readFileSync(templatePath, 'utf8');
+  const token = process.env.GITHUB_TOKEN;
+  const user = process.env.GITHUB_USER;
 
-	let total = 0;
-	let current = 0;
-	let longest = 0;
+  if (!token || !user) {
+    throw new Error('GITHUB_TOKEN and GITHUB_USER are required; refusing to generate fake stats');
+  }
 
-	if (MOCK_MODE) {
-		// Provide deterministic mock data so the user can preview output without tokens
-		total = 1234;
-		current = 7;
-		longest = 42;
-	} else {
-		const calendar = await fetchContributions(GITHUB_USER);
-		total = calendar.totalContributions || 0;
-		const days = flattenDays(calendar.weeks || []);
-		({ current, longest } = computeStreaks(days));
-	}
+  const calendar = await fetchContributions(user, token);
+  const days = flattenDays(calendar.weeks || []);
+  const { current, longest, activeDays } = computeStreaks(days);
+  const target = Math.max(Number(process.env.TARGET_STREAK) || 30, 1);
+  const percent = Math.min(Math.round((current / target) * 100), 100);
+  const circumference = 2 * Math.PI * 64;
+  const ringLength = (percent / 100) * circumference;
 
-	const target = TARGET_STREAK || longest || 1;
-	const percent = Math.round((current / target) * 100);
+  const templatePath = path.resolve(__dirname, '..', 'assets', 'stats-template.svg');
+  const outputPath = path.resolve(__dirname, '..', 'assets', 'stats-card.svg');
+  const template = fs.readFileSync(templatePath, 'utf8');
+  const generated = buildSvg(template, {
+    TOTAL: calendar.totalContributions || 0,
+    CURRENT: current,
+    LONGEST: longest,
+    ACTIVE_DAYS: activeDays,
+    PERCENT: percent,
+    RING_DASH: `${ringLength.toFixed(3)} ${circumference.toFixed(3)}`,
+    BAR_WIDTH: ((percent / 100) * 634).toFixed(1),
+    UPDATED: new Date().toISOString().slice(0, 10),
+  });
 
-	// ring math: radius 90 -> circumference
-	const r = 90;
-	const circumference = 2 * Math.PI * r; // ~565.4867
-	const dash = Math.round((percent / 100) * circumference * 1000) / 1000; // keep precision
-	const ringDash = `${dash} ${Math.round(circumference * 1000) / 1000}`;
-
-	const replacements = {
-		TOTAL: total,
-		CURRENT: current,
-		LONGEST: longest,
-		PERCENT: percent,
-		RING_DASH: ringDash,
-	};
-
-	const outSvg = buildSvg(template, replacements);
-	fs.writeFileSync(outPath, outSvg, 'utf8');
-	console.log('Wrote', outPath, { total, current, longest, percent, mock: MOCK_MODE });
+  fs.writeFileSync(outputPath, generated, 'utf8');
+  console.log(`Updated ${path.relative(process.cwd(), outputPath)} for @${user}`);
 }
 
-main().catch(err => {
-	console.error(err);
-	process.exit(1);
-});
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
+}
 
+module.exports = { buildSvg, computeStreaks, flattenDays, previousDate };

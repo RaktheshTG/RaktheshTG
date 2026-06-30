@@ -1,78 +1,79 @@
 <div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=shark&color=0:0d0221,50:6a0dad,100:8B0000&height=220&section=header&text=RAKTHESH%20TG&fontSize=55&fontColor=ffffff&animation=twinkling&fontAlignY=50" alt="Header"/>
-
-<br/>
-
-[![Typing SVG](https://readme-typing-svg.herokuapp.com/?font=Fira+Code&pause=1000&color=B967FF&center=true&vCenter=true&width=600&lines=Building+full-stack+products+end-to-end;Shipping+RAG+%2B+multi-agent+systems;Crafting+intelligent+AI+experiences)](https://github.com/RaktheshTG)
-
+  <img src="./assets/header-wave-static.svg" alt="Rakthesh TG — full-stack developer and agentic AI builder" width="100%" />
 </div>
+
+<div align="center">
+  <a href="https://github.com/RaktheshTG?tab=repositories">Projects</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/RaktheshTG/CustomerSupportAI">Agentic AI</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/RaktheshTG/paperTrail">PaperTrail</a>
+  &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/rakthesh-tg">LinkedIn</a>
+</div>
+
+<br />
+
+I’m a third-year Computer Science student building products across the full stack, with a particular interest in **RAG pipelines, multi-agent workflows, and thoughtful interfaces**. I like turning ambitious AI ideas into software people can actually use.
+
+- Building with TypeScript, React, Node.js, Python, Express, FastAPI, and MySQL
+- Exploring reliable agent orchestration, retrieval, and human-in-the-loop systems
+- Open to software engineering and AI/ML internship opportunities
+
+## Selected work
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3><a href="https://github.com/RaktheshTG/paperTrail">PaperTrail</a></h3>
+      <p>Turns research-paper URLs into approachable explanations, structured takeaways, and interactive concept maps for curious non-experts.</p>
+      <p><code>TypeScript</code> <code>React</code> <code>TanStack</code> <code>Groq</code> <code>React Flow</code></p>
+    </td>
+    <td width="50%" valign="top">
+      <h3><a href="https://github.com/RaktheshTG/CustomerSupportAI">CustomerSupportAI</a></h3>
+      <p>An agentic customer-support system with retrieval, supervisor routing, persistent memory, and human escalation built into the workflow.</p>
+      <p><code>Python</code> <code>LangGraph</code> <code>RAG</code> <code>Multi-agent</code></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3><a href="https://github.com/RaktheshTG/UniFocus">UniFocus</a></h3>
+      <p>A student productivity workspace for habits, focus sessions, calendars, progress, and recommendations—with account-backed cross-device sync.</p>
+      <p><code>JavaScript</code> <code>Express</code> <code>MySQL</code> <code>REST API</code></p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>What I’m learning now</h3>
+      <p>Advanced data structures and algorithms, production-minded AI systems, and the architecture patterns that keep agents observable and useful.</p>
+      <p><code>DSA</code> <code>System design</code> <code>AI engineering</code></p>
+    </td>
+  </tr>
+</table>
+
+## Toolbox
+
+<p>
+  <img src="https://img.shields.io/badge/TypeScript-15121f?style=flat-square&logo=typescript&logoColor=8b7cff" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/JavaScript-15121f?style=flat-square&logo=javascript&logoColor=f7df1e" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/Python-15121f?style=flat-square&logo=python&logoColor=8b7cff" alt="Python" />
+  <img src="https://img.shields.io/badge/React-15121f?style=flat-square&logo=react&logoColor=61dafb" alt="React" />
+  <img src="https://img.shields.io/badge/Node.js-15121f?style=flat-square&logo=nodedotjs&logoColor=75c46b" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Express-15121f?style=flat-square&logo=express&logoColor=ffffff" alt="Express" />
+  <img src="https://img.shields.io/badge/FastAPI-15121f?style=flat-square&logo=fastapi&logoColor=00c7a5" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/MySQL-15121f?style=flat-square&logo=mysql&logoColor=68a5d6" alt="MySQL" />
+  <img src="https://img.shields.io/badge/LangGraph-15121f?style=flat-square&logo=langchain&logoColor=ff7a90" alt="LangGraph" />
+  <img src="https://img.shields.io/badge/Git-15121f?style=flat-square&logo=git&logoColor=f05032" alt="Git" />
+</p>
+
+## GitHub activity
+
+<div align="center">
+  <img src="./assets/stats-card.svg" alt="Rakthesh's GitHub contribution statistics for the last 12 months" width="100%" />
+</div>
+
+<sub>The card is generated from GitHub’s GraphQL API and refreshed daily by GitHub Actions.</sub>
 
 ---
 
-<br/>
-
-> ### 🔮 ── WHO I AM ──────────────────────────────
-> * **🚀 Third-Year CSE Student** · Full-Stack Developer  
-> * **🧠 Agentic AI Builder** · Custom RAG Pipelines & LangGraph Workflows  
-> * **⚡ Academic Excellence** · JEE Advanced 2024 | 97.07%ile JEE Mains  
-> * **💼 Open to Opportunities** · SWE & AI-ML Internships  
-> ──────────────────────────────────────────────────
-
-<br/>
-
-## ⚡ CAPABILITIES & EXPERTISE
-
-> ### 🛠️ ── WHAT I BUILD ──────────────────────────
-> * **🌐 Full-Stack Web Applications** — React, Next.js, Express, FastAPI  
-> * **🧬 RAG & Vector Search** — Custom embeddings, semantic search, Pinecone, LangChain  
-> * **🤖 Multi-Agent Systems** — LangGraph orchestration, stateful workflows, tool-use  
-> * **🎨 UI/UX Design** — Dark editorials, high-contrast interfaces, accessibility-first  
-> * **📊 Backend Systems** — REST APIs, database optimization, authentication & security  
-> ──────────────────────────────────────────────────
-
-<br/>
-
-## 🖥️ CURRENTLY
-
-```bash
-rakthesh@dev ~ % cat currently.txt
-
-📦 BUILDING
-  PaperTrail        → RAG-powered academic paper explainer with concept maps
-  Whisper-based     → Offline lecture summarization & analysis tool
-
-🎯 EXPLORING
-  Advanced DSA      → Daily algorithm practice
-  Agentic scaling   → Multi-agent architecture patterns
-  
-⚡ STATUS
-  Actively open to SWE / AI-ML summer internships (2025-2026)
-
-```
-# Rakthesh TG
-
-<!-- Header wave (static for README rendering) -->
-<p align="center">
-  <img src="./assets/header-wave-static.svg" alt="RAKTHESH TG" width="100%" />
-</p>
-<p align="center"> <img src="./assets/stats-card.svg" alt="GitHub Stats Card" width="100%" /> </p>
-
-Notes
-
-The file assets/stats-card.svg is generated by the script `scripts/generate-stats.js`. The workflow `.github/workflows/update-stats.yml` will run it daily and commit the updated SVG.
-
-To run locally, set `GITHUB_TOKEN` and `GITHUB_USER` environment variables and run:
-
-```bash
-GITHUB_TOKEN=YOUR_TOKEN GITHUB_USER=your-github-login node scripts/generate-stats.js
-```
-
-The script uses the GitHub GraphQL API to read your contribution calendar and fills the SVG template at `assets/stats-template.svg`. The generated file is `assets/stats-card.svg` which is referenced in this README.
-
-Tweaks you can make
-
-- Colors: edit `assets/header-wave.svg` or `assets/stats-template.svg` gradients.
-- Ring target: pass `TARGET_STREAK` env var (number) to set the target used to compute ring percent.
-
-If you want further improvements (animated ring easing, flame redesign, or dark/light theme switching), tell me which and I'll implement it.
+<div align="center">
+  <i>Build the useful thing. Then make it delightful.</i>
+</div>

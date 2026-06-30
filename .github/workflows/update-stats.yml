@@ -2,11 +2,15 @@ name: Update GitHub Stats SVG
 
 on:
   schedule:
-    - cron: '0 2 * * *' # daily at 02:00 UTC
+    - cron: '35 0 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: profile-stats
+  cancel-in-progress: true
 
 jobs:
   update-stats:
@@ -14,30 +18,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+
+      - name: Test stats generator
+        run: npm test
 
       - name: Run stats generator
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_USER: ${{ github.actor }}
-        run: |
-          node scripts/generate-stats.js
+          GITHUB_USER: ${{ github.repository_owner }}
+        run: npm run generate
 
-      - name: Commit generated SVG (if changed)
+      - name: Commit generated SVG
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Only commit if there are changes to avoid noisy commits
-          if git diff --quiet --exit-code; then
+          git add assets/stats-card.svg
+          if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git add assets/stats-card.svg
-            git commit -m "chore: update stats-card.svg"
+            git commit -m "chore: refresh profile stats"
             git push
           fi

@@ -4,9 +4,10 @@
   "description": "Generate GitHub contribution stats SVG for README",
   "private": true,
   "scripts": {
-    "generate": "node scripts/generate-stats.js"
+    "generate": "node scripts/generate-stats.js",
+    "test": "node scripts/generate-stats.test.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }
