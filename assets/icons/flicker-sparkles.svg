@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" role="img" aria-label="Sparkles">
-  <text x="2" y="22" font-size="20">
-    (
+  <path d="M14 2 L15 8 L21 9 L15 10 L14 16 L13 10 L7 9 L13 8 Z" fill="#ffd84d">
     <animate attributeName="opacity" values="0;0;1;1;0;0;1;1;0" keyTimes="0;0.1;0.15;0.35;0.4;0.6;0.65;0.85;1" dur="2.2s" repeatCount="indefinite"/>
-  </text>
+  </path>
+  <circle cx="6" cy="6" r="1.5" fill="#8b7cff">
+    <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="22" cy="20" r="1.2" fill="#ff6f91">
+    <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
 </svg>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
   <title id="title">Rakthesh TG</title>
-  <desc id="desc">Full-stack developer and agentic AI builder  light theme banner.</desc>
+  <desc id="desc">Full-stack developer and agentic AI builder, light theme banner.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#f8f6ff"/>
@@ -22,10 +22,6 @@
     <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
       <path d="M36 0H0V36" fill="none" stroke="#6a42cc" stroke-opacity=".07"/>
     </pattern>
-    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
 
   <rect width="1200" height="340" rx="24" fill="url(#bg)"/>
@@ -33,7 +29,7 @@
   <circle cx="160" cy="40" r="240" fill="url(#glow1)"/>
   <circle cx="1060" cy="300" r="260" fill="url(#glow2)"/>
 
-  <path fill="url(#wave)" opacity=".14" filter="url(#softGlow)">
+  <path d="M0,250 C200,290 380,180 600,230 C820,280 980,170 1200,220 L1200,340 L0,340 Z" fill="url(#wave)" opacity=".14">
     <animate attributeName="d" dur="9s" repeatCount="indefinite"
       values="M0,250 C200,290 380,180 600,230 C820,280 980,170 1200,220 L1200,340 L0,340 Z;
               M0,240 C220,200 360,280 600,210 C840,140 960,260 1200,200 L1200,340 L0,340 Z;
@@ -42,31 +38,31 @@
   </path>
 
   <g fill="#6a42cc">
-    <circle cx="920" cy="58" r="2.5" opacity=".7"><animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.45;0.5;0.95;1" dur="2.4s" repeatCount="indefinite"/></circle>
-    <circle cx="980" cy="92" r="1.8" opacity=".5"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3;0.35;0.8;1" dur="3s" repeatCount="indefinite"/></circle>
-    <circle cx="1040" cy="48" r="2" opacity=".6"><animate attributeName="opacity" values="1;0;1;0;1" keyTimes="0;0.25;0.5;0.75;1" dur="1.8s" repeatCount="indefinite"/></circle>
+    <circle cx="920" cy="58" r="2.5"><animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.45;0.5;0.95;1" dur="2.4s" repeatCount="indefinite"/></circle>
+    <circle cx="980" cy="92" r="1.8"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3;0.35;0.8;1" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="1040" cy="48" r="2"><animate attributeName="opacity" values="1;0;1;0;1" keyTimes="0;0.25;0.5;0.75;1" dur="1.8s" repeatCount="indefinite"/></circle>
   </g>
 
-  <g transform="translate(1010 130)" filter="url(#softGlow)">
+  <g transform="translate(1010 130)">
     <path d="M18 0 L8 22 H16 L10 44 L30 18 H20 Z" fill="#e6a800" stroke="#c48f00" stroke-width="1">
       <animate attributeName="opacity" values="1;1;0;0;1;1;0;0;1" keyTimes="0;0.12;0.13;0.25;0.26;0.62;0.63;0.75;1" dur="2s" repeatCount="indefinite"/>
     </path>
   </g>
 
   <g transform="translate(72 52)">
-    <rect width="168" height="30" rx="15" fill="#fff" stroke="#8b7cff" stroke-opacity=".35"/>
+    <rect width="168" height="30" rx="15" fill="#ffffff" stroke="#8b7cff" stroke-opacity=".35"/>
     <circle cx="18" cy="15" r="5" fill="#2ea86a">
       <animate attributeName="opacity" values="1;0.35;1" dur="1.6s" repeatCount="indefinite"/>
     </circle>
-    <text x="32" y="19" fill="#5a5280" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="11" letter-spacing="1.3">OPEN TO BUILD</text>
+    <text x="32" y="19" fill="#5a5280" font-family="Segoe UI, Arial, sans-serif" font-size="11" letter-spacing="1.3">OPEN TO BUILD</text>
   </g>
 
-  <text x="72" y="158" fill="url(#titleGrad)" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="62" font-weight="760" letter-spacing="-2">Rakthesh TG</text>
+  <text x="72" y="158" fill="url(#titleGrad)" font-family="Segoe UI, Arial, sans-serif" font-size="62" font-weight="700" letter-spacing="-2">Rakthesh TG</text>
   <rect x="72" y="172" width="460" height="4" rx="2" fill="url(#wave)">
     <animate attributeName="width" values="460;520;460" dur="4s" repeatCount="indefinite"/>
   </rect>
-  <text x="72" y="212" fill="#4a4468" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="20">Full-stack developer · Agentic AI builder</text>
-  <text x="72" y="244" fill="#7a7390" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13">ideas ’ systems ’ useful experiences</text>
+  <text x="72" y="212" fill="#4a4468" font-family="Segoe UI, Arial, sans-serif" font-size="20">Full-stack developer &#183; Agentic AI builder</text>
+  <text x="72" y="244" fill="#7a7390" font-family="Consolas, monospace" font-size="13">ideas &#8594; systems &#8594; useful experiences</text>
 
   <g transform="translate(880 175)" fill="none" stroke-linecap="round">
     <circle cx="70" cy="70" r="58" stroke="#8b7cff" stroke-opacity=".22" stroke-width="2">
@@ -78,10 +74,9 @@
   </g>
 
   <g transform="translate(1120 248)">
-    <text font-size="22" opacity="1">
-      =€
+    <path d="M12 22 L12 10 L18 10 L10 0 L2 10 L8 10 L8 22 Z" fill="#c43d6a">
       <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.48;0.5;0.98;1" dur="2.5s" repeatCount="indefinite"/>
-    </text>
+    </path>
   </g>
 
   <rect y="336" width="1200" height="4" rx="2" fill="url(#wave)"/>

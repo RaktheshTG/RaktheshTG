@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" role="img" aria-label="Rocket">
-  <text x="2" y="22" font-size="20">
-    =€
+  <path d="M14 2 C14 2 20 8 20 14 C20 17 18 19 18 19 L14 26 L10 19 C10 19 8 17 8 14 C8 8 14 2 14 2 Z" fill="#8b7cff">
     <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.48;0.5;0.98;1" dur="2.5s" repeatCount="indefinite"/>
-  </text>
+  </path>
+  <circle cx="14" cy="12" r="2.5" fill="#ffffff"/>
 </svg>

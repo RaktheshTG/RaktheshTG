@@ -1,9 +1,9 @@
 <!-- Header — adapts to system light/dark mode -->
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/header-banner-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="./assets/header-banner-light.svg" />
-    <img src="./assets/header-banner-dark.svg" alt="Rakthesh TG — full-stack developer and agentic AI builder" width="100%" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/header-banner-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/header-banner-light.svg" />
+    <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/header-banner-dark.svg" alt="Rakthesh TG — full-stack developer and agentic AI builder" width="100%" />
   </picture>
 </div>
 
@@ -18,8 +18,8 @@
 
 <!-- Flickering inline decorations -->
 <div align="center">
-  <img src="./assets/icons/flicker-lightning.svg" width="22" alt="" />
-  <img src="./assets/icons/flicker-sparkles.svg" width="22" alt="" />
+  <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-lightning.svg" width="22" alt="" />
+  <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-sparkles.svg" width="22" alt="" />
   <a href="https://github.com/RaktheshTG?tab=repositories">Projects</a>
   &nbsp;·&nbsp;
   <a href="https://github.com/RaktheshTG/CustomerSupportAI">Agentic AI</a>
@@ -28,26 +28,26 @@
   &nbsp;·&nbsp;
   <a href="https://www.linkedin.com/in/rakthesh-tg">LinkedIn</a>
   &nbsp;·&nbsp;
-  <img src="./assets/icons/flicker-fire.svg" width="22" alt="" />
-  <img src="./assets/icons/flicker-rocket.svg" width="22" alt="" />
+  <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-fire.svg" width="22" alt="" />
+  <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-rocket.svg" width="22" alt="" />
 </div>
 
 <br />
 
 ## About me
 
-<img align="right" src="./assets/icons/flicker-lightning.svg" width="28" alt="" />
+<img align="right" src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-lightning.svg" width="28" alt="" />
 
 I'm a third-year **Computer Science** student building products across the full stack, with a deep interest in **RAG pipelines, multi-agent workflows, and thoughtful interfaces**. I like turning ambitious AI ideas into software people can actually use.
 
-<img src="./assets/icons/flicker-sparkles.svg" width="20" alt="" /> Open to software engineering and AI/ML internship opportunities
+<img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-sparkles.svg" width="20" alt="" /> Open to software engineering and AI/ML internship opportunities
 
 <!-- Animated terminal — theme-aware -->
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/terminal-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="./assets/terminal-light.svg" />
-    <img src="./assets/terminal-dark.svg" alt="Terminal showing whoami, focus areas, and tech stack" width="720" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/terminal-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/terminal-light.svg" />
+    <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/terminal-dark.svg" alt="Terminal showing whoami, focus areas, and tech stack" width="720" />
   </picture>
 </div>
 
@@ -115,12 +115,12 @@ I'm a third-year **Computer Science** student building products across the full 
 <table>
   <tr>
     <td width="50%" valign="top">
-      <h3><img src="./assets/icons/flicker-sparkles.svg" width="20" alt="" /> <a href="https://github.com/RaktheshTG/paperTrail">PaperTrail</a></h3>
+      <h3><img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-sparkles.svg" width="20" alt="" /> <a href="https://github.com/RaktheshTG/paperTrail">PaperTrail</a></h3>
       <p>Turns research-paper URLs into approachable explanations, structured takeaways, and interactive concept maps for curious non-experts.</p>
       <p><code>TypeScript</code> <code>React</code> <code>TanStack</code> <code>Groq</code> <code>React Flow</code></p>
     </td>
     <td width="50%" valign="top">
-      <h3><img src="./assets/icons/flicker-lightning.svg" width="20" alt="" /> <a href="https://github.com/RaktheshTG/CustomerSupportAI">CustomerSupportAI</a></h3>
+      <h3><img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-lightning.svg" width="20" alt="" /> <a href="https://github.com/RaktheshTG/CustomerSupportAI">CustomerSupportAI</a></h3>
       <p>An agentic customer-support system with retrieval, supervisor routing, persistent memory, and human escalation built into the workflow.</p>
       <p><code>Python</code> <code>LangGraph</code> <code>RAG</code> <code>Multi-agent</code></p>
     </td>
@@ -132,7 +132,7 @@ I'm a third-year **Computer Science** student building products across the full 
       <p><code>JavaScript</code> <code>Express</code> <code>MySQL</code> <code>REST API</code></p>
     </td>
     <td width="50%" valign="top">
-      <h3><img src="./assets/icons/flicker-fire.svg" width="20" alt="" /> What I'm learning now</h3>
+      <h3><img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-fire.svg" width="20" alt="" /> What I'm learning now</h3>
       <p>Advanced data structures and algorithms, production-minded AI systems, and the architecture patterns that keep agents observable and useful.</p>
       <p><code>DSA</code> <code>System design</code> <code>AI engineering</code></p>
     </td>
@@ -143,9 +143,9 @@ I'm a third-year **Computer Science** student building products across the full 
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/stats-card.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="./assets/stats-card-light.svg" />
-    <img src="./assets/stats-card.svg" alt="Rakthesh's GitHub contribution statistics for the last 12 months" width="100%" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/stats-card.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/stats-card-light.svg" />
+    <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/stats-card.svg" alt="Rakthesh's GitHub contribution statistics for the last 12 months" width="100%" />
   </picture>
 </div>
 
@@ -154,7 +154,7 @@ I'm a third-year **Computer Science** student building products across the full 
 ---
 
 <div align="center">
-  <img src="./assets/icons/flicker-rocket.svg" width="24" alt="" />
+  <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-rocket.svg" width="24" alt="" />
   <br />
   <i>Build the useful thing. Then make it delightful.</i>
   <br />
