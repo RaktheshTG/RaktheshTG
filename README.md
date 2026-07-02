@@ -55,7 +55,7 @@ I'm a third-year **Computer Science** student building products across the full 
 
 ## Tech stack
 
-> Skills grouped by domain — badges adapt to your GitHub theme.
+> Skills grouped by domain — badges adapt to GitHub theme.
 
 ### Languages
 
