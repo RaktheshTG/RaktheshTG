@@ -117,10 +117,7 @@ async function main() {
   const circumference = 2 * Math.PI * 64;
   const ringLength = (percent / 100) * circumference;
 
-  const templatePath = path.resolve(__dirname, '..', 'assets', 'stats-template.svg');
-  const outputPath = path.resolve(__dirname, '..', 'assets', 'stats-card.svg');
-  const template = fs.readFileSync(templatePath, 'utf8');
-  const generated = buildSvg(template, {
+  const replacements = {
     TOTAL: calendar.totalContributions || 0,
     CURRENT: current,
     LONGEST: longest,
@@ -129,10 +126,20 @@ async function main() {
     RING_DASH: `${ringLength.toFixed(3)} ${circumference.toFixed(3)}`,
     BAR_WIDTH: ((percent / 100) * 634).toFixed(1),
     UPDATED: new Date().toISOString().slice(0, 10),
-  });
+  };
 
-  fs.writeFileSync(outputPath, generated, 'utf8');
-  console.log(`Updated ${path.relative(process.cwd(), outputPath)} for @${user}`);
+  const variants = [
+    { template: 'stats-template.svg', output: 'stats-card.svg' },
+    { template: 'stats-template-light.svg', output: 'stats-card-light.svg' },
+  ];
+
+  for (const { template: templateName, output: outputName } of variants) {
+    const templatePath = path.resolve(__dirname, '..', 'assets', templateName);
+    const outputPath = path.resolve(__dirname, '..', 'assets', outputName);
+    const template = fs.readFileSync(templatePath, 'utf8');
+    fs.writeFileSync(outputPath, buildSvg(template, replacements), 'utf8');
+    console.log(`Updated ${path.relative(process.cwd(), outputPath)} for @${user}`);
+  }
 }
 
 if (require.main === module) {

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="240" viewBox="0 0 1000 240" role="img" aria-labelledby="title desc">
+  <title id="title">GitHub activity for the last 12 months</title>
+  <desc id="desc">{{TOTAL}} contributions, {{CURRENT}} day current streak, {{LONGEST}} day longest streak, and {{ACTIVE_DAYS}} active days.</desc>
+  <defs>
+    <linearGradient id="surface" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#faf8ff"/>
+      <stop offset="0.52" stop-color="#f5f2fb"/>
+      <stop offset="1" stop-color="#fff4f7"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6a42cc"/>
+      <stop offset="1" stop-color="#e0557a"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="1" y="1" width="998" height="238" rx="20" fill="url(#surface)" stroke="#ddd5ef"/>
+  <circle cx="914" cy="-8" r="130" fill="#e0557a" opacity=".06"/>
+  <circle cx="55" cy="265" r="160" fill="#6a42cc" opacity=".07"/>
+
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <text x="38" y="42" fill="#2d2640" font-size="18" font-weight="700">GITHUB ACTIVITY</text>
+    <text x="38" y="64" fill="#7a7390" font-size="11" letter-spacing="1.8">LAST 12 MONTHS · SYNCED {{UPDATED}}</text>
+
+    <g transform="translate(38 94)">
+      <text y="36" fill="#1f1a2e" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="38" font-weight="700">{{TOTAL}}</text>
+      <text y="60" fill="#7a7390" font-size="12">contributions</text>
+    </g>
+
+    <g transform="translate(265 94)">
+      <text y="36" fill="#1f1a2e" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="38" font-weight="700">{{ACTIVE_DAYS}}</text>
+      <text y="60" fill="#7a7390" font-size="12">active days</text>
+    </g>
+
+    <g transform="translate(470 94)">
+      <text y="36" fill="#1f1a2e" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="38" font-weight="700">{{LONGEST}}</text>
+      <text y="60" fill="#7a7390" font-size="12">longest streak</text>
+    </g>
+
+    <g transform="translate(742 19)">
+      <circle cx="100" cy="100" r="64" fill="none" stroke="#e4ddf2" stroke-width="11"/>
+      <circle cx="100" cy="100" r="64" fill="none" stroke="url(#accent)" stroke-width="11" stroke-linecap="round"
+        stroke-dasharray="{{RING_DASH}}" transform="rotate(-90 100 100)" filter="url(#glow)"/>
+      <text x="100" y="98" fill="#1f1a2e" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="32" font-weight="700">{{CURRENT}}</text>
+      <text x="100" y="120" fill="#7a7390" text-anchor="middle" font-size="11">CURRENT STREAK</text>
+      <text x="100" y="137" fill="#9a93aa" text-anchor="middle" font-size="10">{{PERCENT}}% OF 30 DAYS</text>
+    </g>
+
+    <rect x="38" y="201" width="634" height="3" rx="2" fill="#e4ddf2"/>
+    <rect x="38" y="201" width="{{BAR_WIDTH}}" height="3" rx="2" fill="url(#accent)"/>
+    <text x="38" y="222" fill="#9a93aa" font-size="10">Generated directly from GitHub contribution data</text>
+  </g>
+</svg>
