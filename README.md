@@ -64,6 +64,7 @@ I'm a third-year **Computer Science** student building products across the full 
   <img src="https://img.shields.io/badge/C++-15121f?style=for-the-badge&logo=cplusplus&logoColor=00599C" alt="C++" />
   <img src="https://img.shields.io/badge/JavaScript-15121f?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript" />
   <img src="https://img.shields.io/badge/Python-15121f?style=for-the-badge&logo=python&logoColor=3776AB" alt="Python" />
+  <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
   <img src="https://img.shields.io/badge/SQL-15121f?style=for-the-badge&logo=postgresql&logoColor=4169E1" alt="SQL" />
   <img src="https://img.shields.io/badge/PL%2FSQL-15121f?style=for-the-badge&logo=oracle&logoColor=F80000" alt="PL/SQL" />
 </p>
@@ -149,7 +150,7 @@ I'm a third-year **Computer Science** student building products across the full 
   </picture>
 </div>
 
-<sub>The card is generated from GitHub's GraphQL API and refreshed daily by GitHub Actions. Light and dark variants follow your system theme.</sub>
+<sub>The card is generated from GitHub's GraphQL API and refreshed daily by GitHub Actions.</sub>
 
 ---
 
