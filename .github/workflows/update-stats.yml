@@ -29,7 +29,7 @@ jobs:
 
       - name: Run stats generator
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.REWRITE_TOKEN}}
           GITHUB_USER: ${{ github.repository_owner }}
         run: npm run generate
 
