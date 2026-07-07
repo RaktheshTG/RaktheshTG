@@ -10,9 +10,9 @@
 <!-- Typing animation — theme-aware -->
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=8B7CFF&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+builder;RAG+%26+multi-agent+systems;CS+student+%C2%B7+3rd+year" />
-    <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=6A42CC&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+builder;RAG+%26+multi-agent+systems;CS+student+%C2%B7+3rd+year" />
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=8B7CFF&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+builder;RAG+%26+multi-agent+systems;CS+student+%C2%B7+3rd+year" alt="Typing animation of current focus areas" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=8B7CFF&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+builder;Turning+ideas+into+impact" />
+    <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=6A42CC&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+builder;Turning+ideas+into+impact" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=8B7CFF&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+builder;Turning+ideas+into+impact" />
   </picture>
 </div>
 
@@ -38,7 +38,7 @@
 
 <img align="right" src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-lightning.svg" width="28" alt="" />
 
-I'm a third-year **Computer Science** student building products across the full stack, with a deep interest in **RAG pipelines, multi-agent workflows, and thoughtful interfaces**. I like turning ambitious AI ideas into software people can actually use.
+I'm a third-year **Computer Science** student building products across the full stack, with a deep interest in **RAG pipelines, multi-agent workflows, and thoughtful interfaces**. I like turning abstract problems into tangible solutions—whether that's a research-paper reader, a customer-support agent, or a student productivity platform.
 
 <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-sparkles.svg" width="20" alt="" /> Open to software engineering and AI/ML internship opportunities
 
@@ -47,7 +47,7 @@ I'm a third-year **Computer Science** student building products across the full 
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/terminal-dark.svg" />
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/terminal-light.svg" />
-    <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/terminal-dark.svg" alt="Terminal showing whoami, focus areas, and tech stack" width="720" />
+    <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/terminal-dark.svg" alt="Terminal showing whoami, focus areas, and tech stack" width="720" style="image-rendering: crisp-edges; font-family: monospace;" />
   </picture>
 </div>
 
@@ -128,7 +128,7 @@ I'm a third-year **Computer Science** student building products across the full 
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <h3><a href="https://github.com/RaktheshTG/UniFocus">UniFocus</a></h3>
+      <h3><img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-rocket.svg" width="20" alt="" /> <a href="https://github.com/RaktheshTG/UniFocus">UniFocus</a></h3>
       <p>A student productivity workspace for habits, focus sessions, calendars, progress, and recommendations—with account-backed cross-device sync.</p>
       <p><code>JavaScript</code> <code>Express</code> <code>MySQL</code> <code>REST API</code></p>
     </td>
