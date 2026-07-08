@@ -127,6 +127,8 @@ I'm a third-year **Computer Science** student building products across the full 
   </picture>
 </div>
 
+<sub>Updated daily with live data from your GitHub repositories.</sub>
+
 ---
 
 ## 🎯 Selected Work
@@ -186,18 +188,8 @@ I'm a third-year **Computer Science** student building products across the full 
 
 ---
 
-## 🏆 Key Achievements
-
 <div align="center">
-  
-  **400+** Total Commits &nbsp;·&nbsp; **7+** Major Projects &nbsp;·&nbsp; **6** Languages &nbsp;·&nbsp; **15+** AI/ML Projects
-  
-</div>
-
----
-
-<div align="center">
-  <img src="https://raw.githubusercontentstg/RaktheshTG/RaktheshTG/main/assets/icons/flicker-rocket.svg" width="24" alt="" />
+  <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-rocket.svg" width="24" alt="" />
   <br />
   <i>Build the useful thing. Then make it delightful.</i>
   <br />
