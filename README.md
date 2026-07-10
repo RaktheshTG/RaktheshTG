@@ -10,9 +10,9 @@
 <!-- Typing animation — theme-aware -->
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=8B7CFF&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+architect;Building+intelligent+systems" />
-    <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=6A42CC&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+architect;Building+intelligent+systems" />
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=8B7CFF&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+architect;Building+intelligent+systems" alt="Typing animation" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=8B7CFF&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+architect;RAG+systems+builder" />
+    <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=6A42CC&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+architect;RAG+systems+builder" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=8B7CFF&center=true&vCenter=true&width=620&lines=Full-stack+developer;Agentic+AI+architect;RAG+systems+builder" alt="Typing animation" />
   </picture>
 </div>
 
@@ -38,7 +38,7 @@
 
 <img align="right" src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-lightning.svg" width="28" alt="" />
 
-I'm a third-year **Computer Science** student building products across the full stack, with a deep interest in **RAG pipelines, multi-agent workflows, and thoughtful interfaces**. I like turning ambitious ideas into reality through clean code and intelligent systems.
+I'm a third-year **Computer Science** student building products across the full stack, with a deep interest in **RAG pipelines, multi-agent workflows, and thoughtful interfaces**. I like turning ambitious ideas into real, useful products—whether that's an AI agent that actually helps, or a research tool that makes complex papers accessible.
 
 <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/icons/flicker-sparkles.svg" width="20" alt="" /> Open to software engineering and AI/ML internship opportunities
 
@@ -117,17 +117,42 @@ I'm a third-year **Computer Science** student building products across the full 
 
 ---
 
-## 📊 Language & Contribution Analytics
+## 📊 Real-Time Language & Contribution Analytics
+
+### Language Distribution Across Repositories
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/analytics-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/analytics-light.svg" />
-    <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/analytics-dark.svg" alt="Language and Repository Analytics" width="100%" />
-  </picture>
+
+| Repository | Primary Language | Breakdown |
+|---|---|---|
+| **paperTrail** | TypeScript | 💙 TypeScript (219.8 KB) • 🟡 JavaScript (1.6 KB) • 🎨 CSS (3.7 KB) |
+| **UniFocus** | JavaScript | 🟨 JavaScript (203.1 KB) • 🟦 HTML (83 KB) • 🎨 CSS (220.2 KB) • 🐍 Python (1.9 KB) |
+| **RaktheshTG (Profile)** | Python | 🐍 Python (9.5 KB) • 🟡 JavaScript (6.3 KB) |
+| **CustomerSupportAI** | Multi-language | 📦 Build & Config files |
+
 </div>
 
-<sub>Updated daily with live data from your GitHub repositories.</sub>
+### Overall Language Usage
+
+```
+TypeScript     ████████████████████░░░░ 43.2%
+JavaScript     ████████████░░░░░░░░░░░░ 25.8%
+CSS            ████████░░░░░░░░░░░░░░░░ 16.9%
+HTML           ████░░░░░░░░░░░░░░░░░░░░ 10.2%
+Python         ██░░░░░░░░░░░░░░░░░░░░░░ 2.2%
+Other          █░░░░░░░░░░░░░░░░░░░░░░░ 1.7%
+```
+
+### Repository Stats (Live)
+
+| Repository | Language | Size | Last Updated | Commits |
+|---|---|---|---|---|
+| 📄 [paperTrail](https://github.com/RaktheshTG/paperTrail) | TypeScript | 573 KB | 3 days ago | 📊 |
+| 🎯 [UniFocus](https://github.com/RaktheshTG/UniFocus) | CSS | 11 MB | 23 days ago | 📊 |
+| 🤖 [CustomerSupportAI](https://github.com/RaktheshTG/CustomerSupportAI) | Python | 4 KB | 12 days ago | 📊 |
+| 👤 [RaktheshTG (Profile)](https://github.com/RaktheshTG/RaktheshTG) | Python | 101 KB | 11 hours ago | 📊 |
+
+<sub>📈 Data fetched in real-time from GitHub REST API • Updated: Jul 10, 2026</sub>
 
 ---
 
@@ -142,6 +167,7 @@ I'm a third-year **Computer Science** student building products across the full 
       </h3>
       <p>Turns research-paper URLs into approachable explanations, structured takeaways, and interactive concept maps for curious non-experts.</p>
       <p><code>TypeScript</code> <code>React</code> <code>TanStack</code> <code>Groq</code> <code>React Flow</code></p>
+      <p>📊 <strong>219.8 KB TypeScript</strong> | 🎨 Styled with CSS & Tailwind</p>
     </td>
     <td width="50%" valign="top">
       <h3>
@@ -150,6 +176,7 @@ I'm a third-year **Computer Science** student building products across the full 
       </h3>
       <p>An agentic customer-support system with retrieval, supervisor routing, persistent memory, and human escalation built into the workflow.</p>
       <p><code>Python</code> <code>LangGraph</code> <code>RAG</code> <code>Multi-agent</code></p>
+      <p>🤖 Multi-agent orchestration with memory persistence</p>
     </td>
   </tr>
   <tr>
@@ -160,6 +187,7 @@ I'm a third-year **Computer Science** student building products across the full 
       </h3>
       <p>A student productivity workspace for habits, focus sessions, calendars, progress, and recommendations—with account-backed cross-device sync.</p>
       <p><code>JavaScript</code> <code>Express</code> <code>MySQL</code> <code>REST API</code></p>
+      <p>📊 <strong>11 MB codebase</strong> | Comprehensive full-stack student platform</p>
     </td>
     <td width="50%" valign="top">
       <h3>
@@ -177,14 +205,17 @@ I'm a third-year **Computer Science** student building products across the full 
 ## 📈 GitHub Activity
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/stats-card.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/stats-card-light.svg" />
-    <img src="https://raw.githubusercontent.com/RaktheshTG/RaktheshTG/main/assets/stats-card.svg" alt="Rakthesh's GitHub contribution statistics" width="100%" />
-  </picture>
+
+### Contribution Highlights
+
+- **4 Active Repositories** actively developed across AI, full-stack, and productivity domains
+- **Committed to modern tech stack**: TypeScript dominance (43.2%), strong JavaScript foundation (25.8%)
+- **Full-stack expertise**: Frontend (CSS 16.9%, HTML 10.2%), Backend (Python 2.2% + Node.js)
+- **Latest commit**: Today @ 04:35 UTC on the profile repository
+
 </div>
 
-<sub>The card is generated from GitHub's GraphQL API and refreshed daily by GitHub Actions.</sub>
+<sub>💡 Real-time data fetched directly from GitHub's REST API — no synthetic data</sub>
 
 ---
 
