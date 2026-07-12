@@ -7,6 +7,7 @@
   </picture>
 </div>
 
+
 <!-- Typing animation — theme-aware -->
 <div align="center">
   <picture>
