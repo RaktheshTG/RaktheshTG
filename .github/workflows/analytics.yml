@@ -1,0 +1,220 @@
+name: Real-Time Language & Contribution Analytics
+
+on:
+  schedule:
+    # Runs at exactly 9:30 PM UTC (which is 3:00 AM IST daily)
+    - cron: '30 21 * * *'
+  
+  # Allow manual trigger via workflow_dispatch
+  workflow_dispatch:
+  
+  # Trigger on push to main branch
+  push:
+    branches:
+      - main
+    paths:
+      - 'README.md'
+
+jobs:
+  generate-analytics:
+    runs-on: ubuntu-latest
+    name: Generate and Update Analytics
+    
+    permissions:
+      contents: write
+      repository-projects: read
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          npm install octokit dotenv
+
+      - name: Generate Analytics Data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          REPO_OWNER: ${{ github.repository_owner }}
+        run: |
+          cat > generate_analytics.js << 'EOF'
+          const { Octokit } = require("octokit");
+          const fs = require("fs");
+          const path = require("path");
+          const octokit = new Octokit({
+            auth: process.env.GITHUB_TOKEN,
+          });
+
+          async function generateAnalytics() {
+            try {
+              console.log("🚀 Starting analytics generation...");
+              
+              const owner = process.env.REPO_OWNER;
+              const actor = process.env.GITHUB_ACTOR;
+
+              // Fetch user profile
+              const userResponse = await octokit.rest.users.getByUsername({
+                username: owner,
+              });
+
+              console.log(`✅ Retrieved profile for ${owner}`);
+
+              // Fetch public repositories
+              const reposResponse = await octokit.rest.repos.listForUser({
+                username: owner,
+                sort: "updated",
+                direction: "desc",
+                per_page: 100,
+                type: "public",
+              });
+
+              console.log(`✅ Retrieved ${reposResponse.data.length} public repositories`);
+
+              // Calculate language distribution
+              const languageStats = {};
+              let totalBytes = 0;
+
+              for (const repo of reposResponse.data) {
+                try {
+                  const langResponse = await octokit.rest.repos.listLanguages({
+                    owner: repo.owner.login,
+                    repo: repo.name,
+                  });
+
+                  const langs = langResponse.data;
+                  for (const [lang, bytes] of Object.entries(langs)) {
+                    languageStats[lang] = (languageStats[lang] || 0) + bytes;
+                    totalBytes += bytes;
+                  }
+                } catch (err) {
+                  console.warn(`⚠️  Could not fetch languages for ${repo.name}`);
+                }
+              }
+
+              // Convert to percentages
+              const languagePercentages = {};
+              for (const [lang, bytes] of Object.entries(languageStats)) {
+                languagePercentages[lang] = ((bytes / totalBytes) * 100).toFixed(1);
+              }
+
+              // Sort by percentage
+              const sortedLanguages = Object.entries(languagePercentages)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 10);
+
+              console.log("📊 Language Distribution:");
+              sortedLanguages.forEach(([lang, pct]) => {
+                console.log(`   ${lang}: ${pct}%`);
+              });
+
+              // Fetch user contributions (commits)
+              let totalCommits = 0;
+              try {
+                const commitsResponse = await octokit.rest.search.commits({
+                  q: `author:${owner} author-date:>=${new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}`,
+                  per_page: 1,
+                  sort: "author-date",
+                });
+                totalCommits = commitsResponse.data.total_count;
+                console.log(`✅ Total commits (last year): ${totalCommits}`);
+              } catch (err) {
+                console.warn("⚠️  Could not fetch commit statistics");
+                totalCommits = 0;
+              }
+
+              // Prepare analytics object
+              const analytics = {
+                timestamp: new Date().toISOString(),
+                profile: {
+                  name: userResponse.data.name || owner,
+                  login: userResponse.data.login,
+                  followers: userResponse.data.followers,
+                  public_repos: userResponse.data.public_repos,
+                  profile_url: userResponse.data.html_url,
+                },
+                statistics: {
+                  total_repositories: reposResponse.data.length,
+                  total_commits_year: totalCommits,
+                  total_followers: userResponse.data.followers,
+                  public_projects: reposResponse.data.length,
+                  total_stars: reposResponse.data.reduce((sum, r) => sum + r.stargazers_count, 0),
+                  total_forks: reposResponse.data.reduce((sum, r) => sum + r.forks_count, 0),
+                },
+                languages: Object.fromEntries(sortedLanguages),
+                top_repositories: reposResponse.data.slice(0, 5).map((repo) => ({
+                  name: repo.name,
+                  url: repo.html_url,
+                  stars: repo.stargazers_count,
+                  forks: repo.forks_count,
+                  description: repo.description,
+                })),
+              };
+
+              // Write analytics to file
+              const analyticsPath = path.join(process.cwd(), "ANALYTICS.json");
+              fs.writeFileSync(analyticsPath, JSON.stringify(analytics, null, 2));
+              console.log(`✅ Analytics saved to ${analyticsPath}`);
+
+              console.log("✅ Analytics generation complete!");
+              process.exit(0);
+            } catch (error) {
+              console.error("❌ Error generating analytics:", error.message);
+              process.exit(1);
+            }
+          }
+
+          generateAnalytics();
+          EOF
+          
+          node generate_analytics.js
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"          
+          # Check if ANALYTICS.json was created
+          if [ -f "ANALYTICS.json" ]; then
+            git add ANALYTICS.json
+            
+            # Only commit if there are changes
+            if ! git diff --cached --quiet; then
+              git commit -m "chore: update analytics data [automated]" || {
+                echo "⚠️  No changes to commit. Exiting safely."
+                exit 0
+              }
+              git push origin main || {
+                echo "⚠️  Push failed or nothing to push. Exiting safely."
+                exit 0
+              }
+              echo "✅ Changes pushed successfully"
+            else
+              echo "ℹ️  No new changes detected. Skipping commit."
+              exit 0
+            fi
+          else
+            echo "⚠️  ANALYTICS.json not found. Skipping push."
+            exit 0
+          fi
+
+      - name: Cleanup
+        if: always()
+        run: |
+          rm -f generate_analytics.js ANALYTICS.json
+          echo "🧹 Cleanup complete"
+
+      - name: Workflow Status Report
+        if: always()
+        run: |
+          echo "✅ Workflow execution completed"
+          echo "📅 Timestamp: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "🔄 Next scheduled run: Tomorrow at 3:00 AM IST"
