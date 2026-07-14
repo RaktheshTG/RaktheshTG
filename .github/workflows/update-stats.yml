@@ -2,7 +2,8 @@ name: Update GitHub Stats SVG
 
 on:
   schedule:
-    - cron: '35 0 * * *'
+    # Runs at exactly 9:30 PM UTC (which is 3:00 AM IST daily)
+    - cron: '30 21 * * *'
   workflow_dispatch:
 
 permissions:
@@ -29,7 +30,7 @@ jobs:
 
       - name: Run stats generator
         env:
-          GITHUB_TOKEN: ${{ secrets.REWRITE_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.REWRITE_TOKEN }}
           GITHUB_USER: ${{ github.repository_owner }}
         run: npm run generate
 
