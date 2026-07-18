@@ -2,7 +2,6 @@ name: Update GitHub Stats SVG
 
 on:
   schedule:
-    # Runs at exactly 9:30 PM UTC (which is 3:00 AM IST daily)
     - cron: '30 21 * * *'
   workflow_dispatch:
 
@@ -24,6 +23,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Test stats generator
         run: npm test
