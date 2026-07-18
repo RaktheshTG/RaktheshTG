@@ -7,11 +7,13 @@ Updated daily via GitHub Actions and regenerated on each push.
 """
 
 import os
+import time
 from github import Github
 
 # Initialize GitHub client
 gh = Github(os.getenv("GITHUB_TOKEN"))
-user = gh.get_user("RaktheshTG")
+username = os.getenv("GITHUB_USER", "RaktheshTG")
+user = gh.get_user(username)
 
 # Get all repos and calculate language distribution
 language_commits = {}
@@ -19,11 +21,11 @@ repo_commits = {}
 all_repos = user.get_repos(sort="updated", direction="desc")
 
 for repo in all_repos:
+    # Skip forks and archived repos
     if repo.fork or repo.archived:
         continue
     
     try:
-        # Get language breakdown
         languages = repo.get_languages()
         commits = repo.get_commits().totalCount
         
@@ -32,7 +34,11 @@ for repo in all_repos:
         # Aggregate languages by commit count (approximate by language bytes ratio)
         for lang, bytes_count in languages.items():
             language_commits[lang] = language_commits.get(lang, 0) + (bytes_count // 1000)
-    except:
+        
+        # Small delay to avoid rate limiting
+        time.sleep(0.2)
+    except Exception as e:
+        print(f"⚠️  Skipping {repo.name}: {e}")
         pass
 
 # Sort and get top 6 languages
@@ -52,6 +58,12 @@ language_colors = {
     "CSS": {"start": "#254BDD", "end": "#FF7F50"},
     "HTML": {"start": "#E34F26", "end": "#FF7F50"},
     "SQL": {"start": "#00A4A4", "end": "#00D4D4"},
+    "Rust": {"start": "#DEA584", "end": "#F74C00"},
+    "Go": {"start": "#00ADD8", "end": "#5DC9E2"},
+    "Shell": {"start": "#89E051", "end": "#4EAA25"},
+    "Dart": {"start": "#00B4AB", "end": "#0175C2"},
+    "Kotlin": {"start": "#A97BFF", "end": "#7F52FF"},
+    "Swift": {"start": "#F05138", "end": "#FA7343"},
 }
 
 repo_color_order = ["#1E90FF", "#FFD700", "#3178C6", "#FF1744", "#ED8B00"]
@@ -74,7 +86,6 @@ def generate_dark_svg():
         '    </linearGradient>',
     ]
     
-    # Add color gradients for each language
     for i, (lang, _) in enumerate(sorted_languages):
         color = get_color(lang, i)
         svg_lines.append(f'    <linearGradient id="lang{i}" x1="0%" y1="0%" x2="100%" y2="0%">')
@@ -91,15 +102,10 @@ def generate_dark_svg():
         '      </feMerge>',
         '    </filter>',
         '  </defs>',
-        '  ',
-        '  <!-- Background -->',
         '  <rect width="1000" height="500" fill="url(#bgGradientDark)" rx="12"/>',
-        '  ',
-        '  <!-- Left Column: Language Distribution -->',
         '  <text x="40" y="40" font-size="24" font-weight="bold" fill="#E0E7FF">📊 Language Distribution</text>',
     ])
     
-    # Add language bars
     y_pos = 80
     for i, (lang, count) in enumerate(sorted_languages):
         percentage = (count / total_lang_count) * 100 if total_lang_count > 0 else 0
@@ -110,10 +116,7 @@ def generate_dark_svg():
         svg_lines.append(f'  <text x="330" y="{y_pos + 32}" font-size="14" fill="#A78BFA" font-weight="bold">{percentage:.0f}%</text>')
         y_pos += 55
     
-    # Vertical divider
     svg_lines.append('  <line x1="550" y1="30" x2="550" y2="480" stroke="#8B7CFF" stroke-width="2" opacity="0.3"/>')
-    
-    # Right Column: Top Repositories
     svg_lines.append('  <text x="600" y="40" font-size="24" font-weight="bold" fill="#E0E7FF">🔥 Top Repositories</text>')
     
     y_pos = 85
@@ -142,7 +145,6 @@ def generate_light_svg():
         '    </linearGradient>',
     ]
     
-    # Add color gradients for each language
     for i, (lang, _) in enumerate(sorted_languages):
         color = get_color(lang, i)
         svg_lines.append(f'    <linearGradient id="langLight{i}" x1="0%" y1="0%" x2="100%" y2="0%">')
@@ -159,15 +161,10 @@ def generate_light_svg():
         '      </feMerge>',
         '    </filter>',
         '  </defs>',
-        '  ',
-        '  <!-- Background -->',
         '  <rect width="1000" height="500" fill="url(#bgGradientLight)" rx="12"/>',
-        '  ',
-        '  <!-- Left Column: Language Distribution -->',
         '  <text x="40" y="40" font-size="24" font-weight="bold" fill="#5B21B6">📊 Language Distribution</text>',
     ])
     
-    # Add language bars
     y_pos = 80
     for i, (lang, count) in enumerate(sorted_languages):
         percentage = (count / total_lang_count) * 100 if total_lang_count > 0 else 0
@@ -178,10 +175,7 @@ def generate_light_svg():
         svg_lines.append(f'  <text x="330" y="{y_pos + 32}" font-size="14" fill="#6B21B6" font-weight="bold">{percentage:.0f}%</text>')
         y_pos += 55
     
-    # Vertical divider
     svg_lines.append('  <line x1="550" y1="30" x2="550" y2="480" stroke="#A78BFA" stroke-width="2" opacity="0.3"/>')
-    
-    # Right Column: Top Repositories
     svg_lines.append('  <text x="600" y="40" font-size="24" font-weight="bold" fill="#5B21B6">🔥 Top Repositories</text>')
     
     y_pos = 85
