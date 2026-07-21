@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="380" viewBox="0 0 1000 380" role="img" aria-labelledby="title desc">
+  <title id="title">Purple language and contribution analysis</title>
+  <desc id="desc">Top languages with flowing purple bars and weekday contribution analysis</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#140b28"/><stop offset="1" stop-color="#2d1455"/></linearGradient>
+    
+  </defs>
+  <rect x="1" y="1" width="998" height="378" rx="18" fill="url(#bg)" stroke="#5b2a86"/>
+
+  <g opacity="0.18"><circle cx="70" cy="54" r="16" fill="#f0abfc"/><circle cx="92" cy="74" r="10" fill="#f0abfc"/><circle cx="50" cy="74" r="10" fill="#f0abfc"/></g>
+  <g opacity="0.15"><circle cx="952" cy="40" r="14" fill="#ddd6fe"/><circle cx="972" cy="56" r="8" fill="#ddd6fe"/><circle cx="934" cy="56" r="8" fill="#ddd6fe"/></g>
+
+  <text x="40" y="42" fill="#f3e8ff" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700">Purple Flow: Language + Contribution Analysis</text>
+  <text x="40" y="64" fill="#c4b5fd" font-family="Segoe UI,Arial,sans-serif" font-size="12">Based on selected active repositories (0)</text>
+
+  <line x1="720" y1="76" x2="720" y2="350" stroke="#6d28d9" opacity="0.55"/>
+  
+
+  <text x="760" y="52" fill="#f5d0fe" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700">Contribution cadence by weekday</text>
+  <text x="760" y="74" fill="#e9d5ff" font-family="Segoe UI,Arial,sans-serif" font-size="12">Mon: 0 (0.0%)</text><text x="760" y="98" fill="#e9d5ff" font-family="Segoe UI,Arial,sans-serif" font-size="12">Tue: 0 (0.0%)</text><text x="760" y="122" fill="#e9d5ff" font-family="Segoe UI,Arial,sans-serif" font-size="12">Wed: 0 (0.0%)</text><text x="760" y="146" fill="#e9d5ff" font-family="Segoe UI,Arial,sans-serif" font-size="12">Thu: 0 (0.0%)</text><text x="760" y="170" fill="#e9d5ff" font-family="Segoe UI,Arial,sans-serif" font-size="12">Fri: 0 (0.0%)</text><text x="760" y="194" fill="#e9d5ff" font-family="Segoe UI,Arial,sans-serif" font-size="12">Sat: 0 (0.0%)</text><text x="760" y="218" fill="#e9d5ff" font-family="Segoe UI,Arial,sans-serif" font-size="12">Sun: 0 (0.0%)</text>
+</svg>

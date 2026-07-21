@@ -1,50 +1,46 @@
-name: Update GitHub Stats SVG
+name: Update Profile Analytics
 
 on:
   schedule:
-    - cron: '30 21 * * *'
+    - cron: '0 3 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: profile-stats
+  group: profile-analytics
   cancel-in-progress: true
 
 jobs:
-  update-stats:
+  refresh-analytics:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '20'
-          cache: 'npm'
+          python-version: '3.12'
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Test stats generator
-        run: npm test
-
-      - name: Run stats generator
+      - name: Generate analytics artifacts
         env:
-          GITHUB_TOKEN: ${{ secrets.REWRITE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USER: ${{ github.repository_owner }}
-        run: npm run generate
+          PROFILE_REPO: ${{ github.event.repository.name }}
+          MAX_REPOS: '12'
+          ACTIVE_REPO_DAYS: '365'
+        run: python3 scripts/generate_analytics.py
 
-      - name: Commit generated SVG
+      - name: Commit updated analytics (if changed)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/stats-card.svg assets/stats-card-light.svg
+          git add README.md assets/analytics/*.svg assets/analytics/summary.md assets/analytics/data.json
           if git diff --cached --quiet; then
-            echo "No changes to commit"
+            echo "No analytics changes detected"
           else
-            git commit -m "chore: refresh profile stats"
+            git commit -m "chore: refresh profile analytics"
             git push
           fi
