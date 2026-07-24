@@ -55,7 +55,7 @@ def iso_now() -> datetime:
 def request_json(url: str, token: str, method: str = "GET", body: dict | None = None) -> dict:
     headers = {
         "Accept": "application/vnd.github+json",
-        "Authorization": f"******",
+        "Authorization": f"Bearer {token}",
         "User-Agent": "profile-analytics-generator",
         "X-GitHub-Api-Version": "2022-11-28",
     }
@@ -261,39 +261,7 @@ def esc(text: str) -> str:
 
 
 def render_stats_svg(data: AnalyticsData) -> str:
-    return f"""<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1000\" height=\"280\" viewBox=\"0 0 1000 280\" role=\"img\" aria-labelledby=\"title desc\">
-  <title id=\"title\">Purple GitHub contribution analytics</title>
-  <desc id=\"desc\">Total contributions {data.total_contributions}, current streak {data.current_streak}, longest streak {data.longest_streak}, commit contributions in last year {data.commit_contributions_12m}</desc>
-  <defs>
-    <linearGradient id=\"bg\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#10081f\"/><stop offset=\"1\" stop-color=\"#2c1451\"/></linearGradient>
-    <linearGradient id=\"accent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\"><stop offset=\"0\" stop-color=\"#a855f7\"/><stop offset=\"1\" stop-color=\"#d946ef\"/></linearGradient>
-    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feGaussianBlur stdDeviation=\"6\"/></filter>
-  </defs>
-  <rect x=\"1\" y=\"1\" width=\"998\" height=\"278\" rx=\"20\" fill=\"url(#bg)\" stroke=\"#5b2a86\"/>
-  <g opacity=\"0.2\"><circle cx=\"130\" cy=\"66\" r=\"26\" fill=\"#f5d0fe\"/><circle cx=\"102\" cy=\"90\" r=\"12\" fill=\"#f5d0fe\"/><circle cx=\"158\" cy=\"90\" r=\"12\" fill=\"#f5d0fe\"/></g>
-  <g opacity=\"0.15\"><circle cx=\"910\" cy=\"220\" r=\"30\" fill=\"#ddd6fe\"/><circle cx=\"880\" cy=\"248\" r=\"14\" fill=\"#ddd6fe\"/><circle cx=\"940\" cy=\"248\" r=\"14\" fill=\"#ddd6fe\"/></g>
-  <text x=\"40\" y=\"44\" fill=\"#f3e8ff\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"22\" font-weight=\"700\">Purple Activity Core</text>
-  <text x=\"40\" y=\"66\" fill=\"#c4b5fd\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"12\">Updated {esc(data.generated_at)} UTC</text>
-
-  <g font-family=\"Segoe UI,Arial,sans-serif\" fill=\"#f8f5ff\">
-    <text x=\"60\" y=\"122\" font-size=\"13\" fill=\"#c4b5fd\">Total Contributions</text>
-    <text x=\"60\" y=\"160\" font-size=\"42\" font-weight=\"700\">{data.total_contributions}</text>
-
-    <text x=\"320\" y=\"122\" font-size=\"13\" fill=\"#c4b5fd\">Current Streak</text>
-    <text x=\"320\" y=\"160\" font-size=\"42\" font-weight=\"700\">{data.current_streak}d</text>
-
-    <text x=\"540\" y=\"122\" font-size=\"13\" fill=\"#c4b5fd\">Longest Streak</text>
-    <text x=\"540\" y=\"160\" font-size=\"42\" font-weight=\"700\">{data.longest_streak}d</text>
-
-    <text x=\"760\" y=\"122\" font-size=\"13\" fill=\"#c4b5fd\">Commit Contributions (12M)</text>
-    <text x=\"760\" y=\"160\" font-size=\"42\" font-weight=\"700\">{data.commit_contributions_12m}</text>
-  </g>
-
-  <rect x=\"40\" y=\"206\" width=\"920\" height=\"18\" rx=\"9\" fill=\"#2f1c4f\"/>
-  <rect x=\"40\" y=\"206\" width=\"{max(20, min(920, int((data.current_streak / max(data.longest_streak, 1)) * 920)))}\" height=\"18\" rx=\"9\" fill=\"url(#accent)\"/>
-  <text x=\"40\" y=\"248\" fill=\"#a78bfa\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"12\">Streak progress relative to longest streak</text>
-</svg>
-"""
+    return f"""<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1000\" height=\"280\" viewBox=\"0 0 1000 280\" role=\"img\" aria-labelledby=\"title desc\">\n  <title id=\"title\">Purple GitHub contribution analytics</title>\n  <desc id=\"desc\">Total contributions {data.total_contributions}, current streak {data.current_streak}, longest streak {data.longest_streak}, commit contributions in last year {data.commit_contributions_12m}</desc>\n  <defs>\n    <linearGradient id=\"bg\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#10081f\"/><stop offset=\"1\" stop-color=\"#2c1451\"/></linearGradient>\n    <linearGradient id=\"accent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\"><stop offset=\"0\" stop-color=\"#a855f7\"/><stop offset=\"1\" stop-color=\"#d946ef\"/></linearGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feGaussianBlur stdDeviation=\"6\"/></filter>\n  </defs>\n  <rect x=\"1\" y=\"1\" width=\"998\" height=\"278\" rx=\"20\" fill=\"url(#bg)\" stroke=\"#5b2a86\"/>\n  <g opacity=\"0.2\"><circle cx=\"130\" cy=\"66\" r=\"26\" fill=\"#f5d0fe\"/><circle cx=\"102\" cy=\"90\" r=\"12\" fill=\"#f5d0fe\"/><circle cx=\"158\" cy=\"90\" r=\"12\" fill=\"#f5d0fe\"/></g>\n  <g opacity=\"0.15\"><circle cx=\"910\" cy=\"220\" r=\"30\" fill=\"#ddd6fe\"/><circle cx=\"880\" cy=\"248\" r=\"14\" fill=\"#ddd6fe\"/><circle cx=\"940\" cy=\"248\" r=\"14\" fill=\"#ddd6fe\"/></g>\n  <text x=\"40\" y=\"44\" fill=\"#f3e8ff\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"22\" font-weight=\"700\">Purple Activity Core</text>\n  <text x=\"40\" y=\"66\" fill=\"#c4b5fd\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"12\">Updated {esc(data.generated_at)} UTC</text>\n\n  <g font-family=\"Segoe UI,Arial,sans-serif\" fill=\"#f8f5ff\">\n    <text x=\"60\" y=\"122\" font-size=\"13\" fill=\"#c4b5fd\">Total Contributions</text>\n    <text x=\"60\" y=\"160\" font-size=\"42\" font-weight=\"700\">{data.total_contributions}</text>\n\n    <text x=\"320\" y=\"122\" font-size=\"13\" fill=\"#c4b5fd\">Current Streak</text>\n    <text x=\"320\" y=\"160\" font-size=\"42\" font-weight=\"700\">{data.current_streak}d</text>\n\n    <text x=\"540\" y=\"122\" font-size=\"13\" fill=\"#c4b5fd\">Longest Streak</text>\n    <text x=\"540\" y=\"160\" font-size=\"42\" font-weight=\"700\">{data.longest_streak}d</text>\n\n    <text x=\"760\" y=\"122\" font-size=\"13\" fill=\"#c4b5fd\">Commit Contributions (12M)</text>\n    <text x=\"760\" y=\"160\" font-size=\"42\" font-weight=\"700\">{data.commit_contributions_12m}</text>\n  </g>\n\n  <rect x=\"40\" y=\"206\" width=\"920\" height=\"18\" rx=\"9\" fill=\"#2f1c4f\"/>\n  <rect x=\"40\" y=\"206\" width=\"{max(20, min(920, int((data.current_streak / max(data.longest_streak, 1)) * 920)))}\" height=\"18\" rx=\"9\" fill=\"url(#accent)\"/>\n  <text x=\"40\" y=\"248\" fill=\"#a78bfa\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"12\">Streak progress relative to longest streak</text>\n</svg>\n"""
 
 
 def wave_path(x: float, y: float, width: float, amplitude: float, waves: int = 3) -> str:
@@ -352,28 +320,7 @@ def render_language_svg(data: AnalyticsData) -> str:
             f'<text x="760" y="{row_y}" fill="#e9d5ff" font-family="Segoe UI,Arial,sans-serif" font-size="12">{label}: {count} ({pct:.1f}%)</text>'
         )
 
-    return f"""<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1000\" height=\"380\" viewBox=\"0 0 1000 380\" role=\"img\" aria-labelledby=\"title desc\">
-  <title id=\"title\">Purple language and contribution analysis</title>
-  <desc id=\"desc\">Top languages with flowing purple bars and weekday contribution analysis</desc>
-  <defs>
-    <linearGradient id=\"bg\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#140b28\"/><stop offset=\"1\" stop-color=\"#2d1455\"/></linearGradient>
-    {''.join(legend)}
-  </defs>
-  <rect x=\"1\" y=\"1\" width=\"998\" height=\"378\" rx=\"18\" fill=\"url(#bg)\" stroke=\"#5b2a86\"/>
-
-  <g opacity=\"0.18\"><circle cx=\"70\" cy=\"54\" r=\"16\" fill=\"#f0abfc\"/><circle cx=\"92\" cy=\"74\" r=\"10\" fill=\"#f0abfc\"/><circle cx=\"50\" cy=\"74\" r=\"10\" fill=\"#f0abfc\"/></g>
-  <g opacity=\"0.15\"><circle cx=\"952\" cy=\"40\" r=\"14\" fill=\"#ddd6fe\"/><circle cx=\"972\" cy=\"56\" r=\"8\" fill=\"#ddd6fe\"/><circle cx=\"934\" cy=\"56\" r=\"8\" fill=\"#ddd6fe\"/></g>
-
-  <text x=\"40\" y=\"42\" fill=\"#f3e8ff\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"22\" font-weight=\"700\">Purple Flow: Language + Contribution Analysis</text>
-  <text x=\"40\" y=\"64\" fill=\"#c4b5fd\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"12\">Based on selected active repositories ({data.selected_repo_count})</text>
-
-  <line x1=\"720\" y1=\"76\" x2=\"720\" y2=\"350\" stroke=\"#6d28d9\" opacity=\"0.55\"/>
-  {''.join(bars)}
-
-  <text x=\"760\" y=\"52\" fill=\"#f5d0fe\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"14\" font-weight=\"700\">Contribution cadence by weekday</text>
-  {''.join(weekday_rows)}
-</svg>
-"""
+    return f"""<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1000\" height=\"380\" viewBox=\"0 0 1000 380\" role=\"img\" aria-labelledby=\"title desc\">\n  <title id=\"title\">Purple language and contribution analysis</title>\n  <desc id=\"desc\">Top languages with flowing purple bars and weekday contribution analysis</desc>\n  <defs>\n    <linearGradient id=\"bg\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#140b28\"/><stop offset=\"1\" stop-color=\"#2d1455\"/></linearGradient>\n    {''.join(legend)}\n  </defs>\n  <rect x=\"1\" y=\"1\" width=\"998\" height=\"378\" rx=\"18\" fill=\"url(#bg)\" stroke=\"#5b2a86\"/>\n\n  <g opacity=\"0.18\"><circle cx=\"70\" cy=\"54\" r=\"16\" fill=\"#f0abfc\"/><circle cx=\"92\" cy=\"74\" r=\"10\" fill=\"#f0abfc\"/><circle cx=\"50\" cy=\"74\" r=\"10\" fill=\"#f0abfc\"/></g>\n  <g opacity=\"0.15\"><circle cx=\"952\" cy=\"40\" r=\"14\" fill=\"#ddd6fe\"/><circle cx=\"972\" cy=\"56\" r=\"8\" fill=\"#ddd6fe\"/><circle cx=\"934\" cy=\"56\" r=\"8\" fill=\"#ddd6fe\"/></g>\n\n  <text x=\"40\" y=\"42\" fill=\"#f3e8ff\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"22\" font-weight=\"700\">Purple Flow: Language + Contribution Analysis</text>\n  <text x=\"40\" y=\"64\" fill=\"#c4b5fd\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"12\">Based on selected active repositories ({data.selected_repo_count})</text>\n\n  <line x1=\"720\" y1=\"76\" x2=\"720\" y2=\"350\" stroke=\"#6d28d9\" opacity=\"0.55\"/>\n  {''.join(bars)}\n\n  <text x=\"760\" y=\"52\" fill=\"#f5d0fe\" font-family=\"Segoe UI,Arial,sans-serif\" font-size=\"14\" font-weight=\"700\">Contribution cadence by weekday</text>\n  {''.join(weekday_rows)}\n</svg>\n"""
 
 
 def render_summary_markdown(data: AnalyticsData, fallback_notice: str | None = None) -> str:
