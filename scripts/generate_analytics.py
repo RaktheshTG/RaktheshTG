@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import json
 import os
+import time
+import traceback
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
@@ -20,6 +22,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Tuple
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
 
 ROOT = Path(__file__).resolve().parents[1]
 README_PATH = ROOT / "README.md"
@@ -52,7 +55,11 @@ def iso_now() -> datetime:
     return datetime.now(timezone.utc)
 
 
-def request_json(url: str, token: str, method: str = "GET", body: dict | None = None) -> dict:
+def request_json(url: str, token: str, method: str = "GET", body: dict | None = None, retries: int = 3, backoff: float = 1.0) -> dict:
+    """Perform an HTTP request to GitHub and return parsed JSON.
+
+    This function retries transient failures, logs useful context, and raises on permanent errors.
+    """
     headers = {
         "Accept": "application/vnd.github+json",
         "Authorization": f"Bearer {token}",
@@ -60,21 +67,63 @@ def request_json(url: str, token: str, method: str = "GET", body: dict | None = 
         "X-GitHub-Api-Version": "2022-11-28",
     }
     payload = json.dumps(body).encode("utf-8") if body is not None else None
-    req = Request(url, data=payload, headers=headers, method=method)
-    with urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+
+    last_exc: Exception | None = None
+    for attempt in range(1, retries + 1):
+        try:
+            req = Request(url, data=payload, headers=headers, method=method)
+            print(f"[analytics] Requesting {method} {url} (attempt {attempt}/{retries})")
+            with urlopen(req, timeout=30) as resp:
+                status = getattr(resp, "status", resp.getcode()) if resp is not None else None
+                raw = resp.read().decode("utf-8")
+                print(f"[analytics] Response status: {status} for {url}")
+                return json.loads(raw)
+        except HTTPError as http_err:
+            # HTTPError contains a status code and a response body
+            try:
+                body_text = http_err.read().decode("utf-8") if hasattr(http_err, "read") else str(http_err)
+            except Exception:
+                body_text = str(http_err)
+            print(f"[analytics][error] HTTPError {http_err.code} while requesting {url}: {body_text}")
+            # For 4xx errors, don't retry except for 429 (rate limit)
+            if 400 <= getattr(http_err, "code", 0) < 500 and getattr(http_err, "code", 0) != 429:
+                raise
+            last_exc = http_err
+        except URLError as url_err:
+            print(f"[analytics][error] URLError while requesting {url}: {url_err}")
+            last_exc = url_err
+        except Exception as exc:  # noqa: BLE001
+            print(f"[analytics][error] Unexpected error while requesting {url}: {exc}")
+            last_exc = exc
+
+        if attempt < retries:
+            sleep_time = backoff * (2 ** (attempt - 1))
+            print(f"[analytics] Retrying in {sleep_time:.1f}s...")
+            time.sleep(sleep_time)
+
+    # All attempts failed
+    print("[analytics][error] All request attempts failed. Raising last exception.")
+    if last_exc:
+        raise last_exc
+    raise RuntimeError("request_json failed without an exception")
 
 
 def graphql(token: str, query: str, variables: dict) -> dict:
-    payload = request_json(
-        "https://api.github.com/graphql",
-        token,
-        method="POST",
-        body={"query": query, "variables": variables},
-    )
+    try:
+        payload = request_json(
+            "https://api.github.com/graphql",
+            token,
+            method="POST",
+            body={"query": query, "variables": variables},
+        )
+    except Exception as exc:
+        print(f"[analytics][error] GraphQL request failed: {exc}")
+        raise
+
     errors = payload.get("errors") or []
     if errors:
         joined = "; ".join(err.get("message", "GraphQL error") for err in errors)
+        print(f"[analytics][error] GraphQL returned errors: {joined}")
         raise RuntimeError(joined)
     return payload["data"]
 
@@ -431,6 +480,18 @@ def write_outputs(data: AnalyticsData, error_message: str | None = None) -> None
     README_PATH.write_text(updated, encoding="utf-8")
 
 
+def check_token(token: str) -> None:
+    """Simple pre-flight: validate the supplied token and log the authenticated user."""
+    try:
+        data = request_json("https://api.github.com/user", token)
+        login = data.get("login")
+        print(f"[analytics] Authenticated as: {login}")
+    except Exception as exc:
+        print("[analytics][error] Token validation failed:")
+        traceback.print_exc()
+        raise
+
+
 def build_analytics(username: str, token: str) -> AnalyticsData:
     total_contribs, current, longest, commit_12m, active_days_12m, _day_counts, weekday_totals = collect_contribution_stats(username, token)
 
@@ -468,11 +529,16 @@ def main() -> int:
         return 0
 
     try:
+        # Pre-flight token validation to give an early, clear error if the token is invalid.
+        check_token(token)
+
         analytics = build_analytics(username, token)
         write_outputs(analytics)
         print(f"Generated analytics for @{username}")
         return 0
     except Exception as exc:  # noqa: BLE001
+        print("[analytics][error] Exception during analytics generation:")
+        traceback.print_exc()
         fallback = fallback_data(username)
         write_outputs(fallback, str(exc))
         print(f"Generated fallback analytics due to API error: {exc}")
